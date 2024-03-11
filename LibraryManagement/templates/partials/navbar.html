@@ -1,0 +1,9 @@
+<nav class="navbar navbar-dark bg-dark  sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fs-2 fw-bold " href="{% url 'home' %}">Library Management</a>
+        <form class="d-flex">
+            <button type="button" class="btn btn-primary fw-bold btn-login"><a
+                    href="{% url 'login' %}?next={{ request.path }}">Login</a></button>
+        </form>
+    </div>
+</nav>

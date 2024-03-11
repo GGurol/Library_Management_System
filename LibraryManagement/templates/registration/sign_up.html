@@ -1,0 +1,18 @@
+{% extends 'partials/base.html' %}
+{% block title %}SignUp{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<div class="login-container">
+    <div class="signup-section">
+        <form method="post">
+            {% csrf_token %}{{form|crispy}}
+            <p>Have an account? <a href="/login">Login</a></p>
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+    </div>
+    <img src="{% static 'images/reading.svg' %}" alt="Admin Image">
+</div>
+
+{% endblock %}
