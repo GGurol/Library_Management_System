@@ -1,9 +1,34 @@
+{% load static %}
 <nav class="navbar navbar-dark bg-dark  sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand fs-2 fw-bold " href="{% url 'home' %}">Library Management</a>
         <form class="d-flex">
+            <a href="">Home</a>
+            <div class="dropdown">
+                <a class="dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                    aria-expanded="false">Books</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">All Books</a>
+                    <a href="#" class="dropdown-item">Borrowed Books</a>
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="account dropdown">
+                <div class="profile" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{% static 'images/account.png' %}" alt="account">
+                    <a class="username">{{user.username}}</a>
+                    <div class="dropdown-menu logout-menu">
+                        <form action="{% url 'logout' %}" method="post" class="dropdown-item">
+                            {% csrf_token %}
+                            <input type="submit" value="Logout" class="btn btn-primary fw-bold logout-btn">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
             <button type="button" class="btn btn-primary fw-bold btn-login"><a
                     href="{% url 'login' %}?next={{ request.path }}">Login</a></button>
+            {% endif %}
         </form>
     </div>
 </nav>

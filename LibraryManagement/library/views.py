@@ -22,3 +22,7 @@ def sign_up(request):
         form = RegistrationForm()
 
     return render(request, 'registration/sign_up.html', {"form": form} )
+
+def logout(request):
+    logout(request)
+    return redirect ('/home')

@@ -13,6 +13,55 @@ html {
     padding-left: 20px;
 }
 
+.navbar form {
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+
+}
+.profile .username {
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+.profile img {
+    width:25px;
+    height: 25px;
+}
+.dropdown:hover{
+    cursor: pointer;
+}
+
+.logout-menu {
+    min-width: 100%;
+    min-height: 70px;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-btn{
+    width: 80%;
+    margin-left: 8px;
+    background-color:#0d6efd;
+    border-radius: 5px;
+}
+
+.dropdown-menu {
+    background-color: #212529;
+}
+
+.account button:hover {
+    background-color: #0056d7;
+}
+
 .header {
     height: 600px;
     background-image: url("../images/bgimg.jpg");
@@ -24,15 +73,25 @@ html {
 }
 
 .registration_section{
-    max-width: 600px;
+    max-width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: white;
     font-family: monospace;
-    font-size: 38px;
+    font-size: 2vw;
     font-weight: bold;
-    line-height: 48px;
+    padding: 30px 50px;
+
+    background: rgba(255, 255, 255, .2);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, .2);
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-right: 2px solid rgba(255, 255, 255, .2);
+    border-bottom: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur (10px);
+
+
 }
 .registration_section a{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
