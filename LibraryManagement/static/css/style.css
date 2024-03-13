@@ -140,3 +140,81 @@ html {
 .card {
     padding: 7px;
 }
+
+
+/* ---------- All Books----------- */
+.allbooks{
+    width: 90%;
+    margin: 30px auto;
+    border: 3px solid;
+    padding: 30px;
+}
+
+.allbooks h3 {
+    margin-left: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+.search-book {
+    width: 300px;
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+.singlebook:hover {
+    cursor: pointer;
+}
+.singlebook a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.book_rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+}
+
+
+/* ------------ Book Details ----------  */
+
+.single_book {
+    /* margin: 50px; */
+    padding: 30px;
+    background-color: #0303030f;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+.book_cover img {
+    margin-top: 10px;
+    width: 500px;
+    height:500px;
+    object-fit: contain;
+}
+.book_cover a {
+    text-decoration: none;
+    color: #212529;
+    font-family: monospace;
+}
+
+.book_title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    /* font-size: 38px; */
+}
+
+.book_details {
+    max-width: 600px;
+    padding-top: 50px;
+}
+.book_details .description {
+    text-align: justify;
+}
+
+.book_details div {
+    margin-top: 10px;
+}

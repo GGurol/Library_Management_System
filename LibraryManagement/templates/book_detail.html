@@ -1,0 +1,46 @@
+{% extends 'partials/base.html' %}
+{% block title %}All Books{% endblock %}
+{% load static %}
+{% load bootstrap_icons %}
+{% block content %}
+
+
+<div class="single_book">
+    <div class="book_cover">
+        <h5 style="margin-left: 20px;"> {% bs_icon 'arrow-left-circle' %}<a href="javascript:history.back()"> Back</a>
+        </h5>
+        <img src="{{ book.book_img.url }}" alt=" book cover for {{ book.title }}" width="">
+    </div>
+
+    <div class="book_details">
+        <h1 class="book_title"> {{ book.title }}</h1>
+        <div class="book_rating">
+            <img src="{% static 'images/star.png' %}" alt="account" width="20px">
+            {{ book.average_rating|floatformat:1 }} | {{ book.total_reviews }} <span> reviews </span>
+        </div>
+        <div class="book_author"> <strong>Author:</strong> {{ book.author }}</div>
+        <div class="description">
+            <p>
+                <strong>Description:</strong> {{ book.description }}
+            </p>
+        </div>
+        <div class="book_genre">
+            <strong>Genres:</strong>
+            {% for genre in book.genres.all %}
+            {{ genre.name }}
+            {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </div>
+        <div class="book_copies">
+            <strong>Available Copies:</strong>
+            {{ book.copies }}
+        </div>
+
+        <a href="" class="btn btn-primary mt-3"> Borrow Book </a>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
