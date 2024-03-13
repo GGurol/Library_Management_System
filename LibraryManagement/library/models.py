@@ -49,12 +49,21 @@ class User(AbstractUser):
 class Book(models.Model): 
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    genres = models.ManyToManyField('Genre', related_name='books') 
-    description = models.TimeField()
+    description = models.TextField(default = ' {title} is written by {author}')
+    genres = models.ManyToManyField('Genre', related_name='books')
     copies = models.PositiveIntegerField()
     book_img = models.ImageField (null=True, blank=True)
     def __str__(self):
         return self.title 
+    def average_rating(self):
+        reviews = Review.objects.filter(book=self)
+        if reviews.exists():
+            total_rating = sum(review.rating for review in reviews)
+            return total_rating / reviews.count()
+        else:
+            return 0.0
+    def total_reviews(self):
+        return Review.objects.filter(book=self).count()
 
 class Genre(models.Model): 
     name = models.CharField(max_length=255)
