@@ -19,6 +19,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('role', 'SuperAdmin')
 
         return self.create_user(username, email, password, **extra_fields)
 
@@ -49,13 +50,19 @@ class User(AbstractUser):
 class Book(models.Model): 
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
-    description = models.TextField(default = ' {title} is written by {author}')
+    description = models.TextField(blank=True)
     genres = models.ManyToManyField('Genre', related_name='books')
     copies = models.PositiveIntegerField()
     book_img = models.ImageField (null=True, blank=True)
     
     def __str__(self):
         return self.title 
+    
+    def save(self, *args, **kwargs):
+        if not self.description:
+            self.description = f"{self.title} is written by {self.author}"
+        super().save(*args, **kwargs)
+        
     def average_rating(self):
         reviews = Review.objects.filter(book=self)
         if reviews.exists():
@@ -84,5 +91,7 @@ class Borrow(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     borrow_date = models.DateField(auto_now_add=True) 
     return_date = models.DateField(null=True, blank=True)
+    status = models.BooleanField(default = False)
     def __str__(self): 
         return f"{self.user.username} borrowed {self.book.title}"
+

@@ -3,14 +3,14 @@
 {% load static %}
 {% block content %}
 {% load bootstrap_icons %}
-{% if books %}
+{% if books_with_dates %}
 <div class="container-fluid">
     <h5 class="mt-4" style="margin-left: 20px;"> {% bs_icon 'arrow-left-circle' %}<a href="javascript:history.back()">
             Back</a>
     </h5>
     <h2 class="text-center mb-5" style="font-family: Arial, Helvetica, sans-serif;">Borrowed Books</h2>
     <div class="borrowed_books_container">
-        {% for book in books %}
+        {% for book, return_date in books_with_dates %}
         <div class="card m-2 book-card" style="width: 18rem;">
             <img src="{{ book.book_img.url }}" alt="Book Cover for {{ book.title }}" class="card-img-top" width="300px"
                 height="300px">
@@ -20,6 +20,7 @@
                     <img src="{% static 'images/star.png' %}" alt="Star Icon" width="20px">
                     {{ book.average_rating|floatformat:1 }} | {{ book.total_reviews }} <span>reviews</span>
                 </div>
+                <div class="return_date"> <strong>Return Date: </strong>{{ return_date }}</div>
                 <a href="#" class="btn btn-primary mt-4">Return Book</a>
             </div>
         </div>
