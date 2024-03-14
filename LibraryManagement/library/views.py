@@ -44,11 +44,11 @@ def borrow(request, user_id, book_id):
         user = get_object_or_404(User, pk=user_id)
         book = get_object_or_404(Book, pk=book_id)
         
-        if Borrow.objects.filter(user=user, book=book).exists():
+        if Borrow.objects.filter(user=user, book=book , is_returned = False).exists():
             messages.error(request, "You have already borrowed this book.")
             return redirect('book_detail', book_id=book_id)
         
-        num_borrowed_books = Borrow.objects.filter(user=user).count()
+        num_borrowed_books = Borrow.objects.filter(user=user , is_returned = False).count()
         if num_borrowed_books >= 3:
             messages.error(request, "You have already borrowed the maximum number of books. Return th books to borrow another")
             return redirect('book_detail', book_id=book_id)
@@ -74,6 +74,17 @@ def borrow(request, user_id, book_id):
 @login_required
 def borrowed_books(request, user_id):
     user = get_object_or_404(User, pk=user_id)
-    borrowings = Borrow.objects.filter(user=user)
-    books_with_dates = [(borrow.book, borrow.return_date) for borrow in borrowings]
+    borrowings = Borrow.objects.filter(user=user, is_returned=False)
+    books_with_dates = [(borrow.book, borrow.return_date, borrow) for borrow in borrowings]
     return render(request, 'borrowed_books.html', {'books_with_dates': books_with_dates})
+
+def return_book(request, borrow_id):
+    borrowed_book = get_object_or_404(Borrow, pk=borrow_id)
+    borrowed_book.is_returned = True
+    borrowed_book.save()
+    returned_book = get_object_or_404 (Book, pk=borrowed_book.book_id)
+    returned_book.copies += 1 
+    returned_book.save()
+
+
+    return redirect('borrowed_books', user_id=borrowed_book.user.pk)

@@ -220,6 +220,17 @@ html {
 }
 
 /* -------Borrowed Books ------------ */
+.borrowed_books {
+    width: 80%;
+    margin: 60px auto;
+}
+
+.borrowed_books a {
+    text-decoration: none;
+    color:#212529;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 
 .borrowed_books_container {
     display: flex;

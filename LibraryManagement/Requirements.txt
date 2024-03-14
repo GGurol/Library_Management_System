@@ -9,6 +9,7 @@ django-admin-interface==0.28.6
 django-bootstrap-icons==0.8.7
 django-colorfield==0.11.0
 django-crispy-forms==2.1
+django-jazzmin==2.6.0
 django-ordered-model==3.7.4
 idna==3.6
 pillow==10.2.0

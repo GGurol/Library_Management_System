@@ -62,7 +62,7 @@ class Book(models.Model):
         if not self.description:
             self.description = f"{self.title} is written by {self.author}"
         super().save(*args, **kwargs)
-        
+
     def average_rating(self):
         reviews = Review.objects.filter(book=self)
         if reviews.exists():
@@ -91,7 +91,7 @@ class Borrow(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     borrow_date = models.DateField(auto_now_add=True) 
     return_date = models.DateField(null=True, blank=True)
-    status = models.BooleanField(default = False)
+    is_returned = models.BooleanField(default = False)
     def __str__(self): 
         return f"{self.user.username} borrowed {self.book.title}"
 
