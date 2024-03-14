@@ -9,7 +9,7 @@
                     aria-expanded="false">Books</a>
                 <div class="dropdown-menu">
                     <a href="/all-books" class="dropdown-item">All Books</a>
-                    <a href="#" class="dropdown-item">Borrowed Books</a>
+                    <a href="{% url 'borrowed_books' user_id=user.id %}" class="dropdown-item">Borrowed Books</a>
                 </div>
             </div>
             {% if user.is_authenticated %}

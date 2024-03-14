@@ -218,3 +218,12 @@ html {
 .book_details div {
     margin-top: 10px;
 }
+
+/* -------Borrowed Books ------------ */
+
+.borrowed_books_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}

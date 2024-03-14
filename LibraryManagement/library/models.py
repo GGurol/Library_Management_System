@@ -53,6 +53,7 @@ class Book(models.Model):
     genres = models.ManyToManyField('Genre', related_name='books')
     copies = models.PositiveIntegerField()
     book_img = models.ImageField (null=True, blank=True)
+    
     def __str__(self):
         return self.title 
     def average_rating(self):
