@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.db.models import Q
 # Create your views here.
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -32,7 +32,12 @@ def logout(request):
     return redirect ('/home')
 
 def all_books(request):
-    allbooks = Book.objects.all()
+    if 'query' in request.GET:
+        query = request.GET['query'] 
+        multiple_query = Q(Q(title__icontains = query) | Q(author__contains = query))
+        allbooks = Book.objects.filter(multiple_query)
+    else:
+        allbooks = Book.objects.all()
     return render(request , 'allbooks.html' , {'allbooks' : allbooks})
 
 def book_detail(request, book_id):

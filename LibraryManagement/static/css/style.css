@@ -144,14 +144,16 @@ html {
 
 /* ---------- All Books----------- */
 .allbooks{
-    width: 90%;
-    margin: 30px auto;
+    margin: 30px;
     border: 3px solid;
     padding: 30px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .allbooks h3 {
-    margin-left: 10px;
+    margin-bottom: 50px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
 }

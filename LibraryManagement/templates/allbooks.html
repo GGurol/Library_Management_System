@@ -3,41 +3,47 @@
 {% load static %}
 {% block content %}
 
+<h3 class="text-center mt-4">ALL BOOKS</h3>
 <div class="allbooks">
-    <h3> BOOKS</h3>
-    <form class="d-flex search-book" role="search">
-        <input class=" form-control me-2" type="search" placeholder="Search a book" aria-label="Search">
-        <button class="btn btn-primary" type="submit">Search</button>
-    </form>
+    <div class="search_filter">
+        <form class="d-flex search-book" role="search">
+            <input class=" form-control me-2" name="query" type="search" placeholder="Search by title or author"
+                aria-label="Search">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
 
-    <table class="table table-bordered table-hover mt-5 w-75">
-        <thead>
-            <tr class="table-secondary">
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Copies</th>
-                <th scope="col">Rating</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in allbooks %}
-            <tr class="singlebook">
-                <th scope="row">{{ forloop.counter }}</th>
-                <td> <a href="{% url 'book_detail' book.id %}">{{ book.title }} </a></td>
-                <td>{{ book.author }}</td>
-                <td>{% for genre in book.genres.all %}
-                    {{ genre.name }}
-                    {% if not forloop.last %}, {% endif %}
-                    {% endfor %}</td>
-                <td>{{ book.copies }}</td>
-                <td> <img src="{% static 'images/star.png' %}" alt="account" width="30px">
-                    {{ book.average_rating|floatformat:1 }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="tabel">
+        <table class="table table-bordered table-hover mt-3 w-100">
+            <thead>
+                <tr class="table-secondary">
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Copies</th>
+                    <th scope="col">Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in allbooks %}
+                <tr class="singlebook">
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td> <a href="{% url 'book_detail' book.id %}">{{ book.title }} </a></td>
+                    <td>{{ book.author }}</td>
+                    <td>{% for genre in book.genres.all %}
+                        {{ genre.name }}
+                        {% if not forloop.last %}, {% endif %}
+                        {% endfor %}</td>
+                    <td>{{ book.copies }}</td>
+                    <td> <img src="{% static 'images/star.png' %}" alt="account" width="30px">
+                        {{ book.average_rating|floatformat:1 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 
 
 </div>
