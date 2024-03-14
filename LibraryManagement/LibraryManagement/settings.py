@@ -30,8 +30,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django_admin_index',
+INSTALLED_APPS = [  
+    'jazzmin',
     'ordered_model',
     'admin_interface',
     'colorfield',
@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'library'
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'bootstrap5')
+CRISPY_TEMPLATE_PACK = 'bootstrap5'  
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
