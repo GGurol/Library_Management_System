@@ -9,6 +9,7 @@ from .models import Book,User,Borrow
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime, timedelta
+from .filters import BookFilter
 # Create your views here.
 
 def home_page(request):
@@ -32,13 +33,15 @@ def logout(request):
     return redirect ('/home')
 
 def all_books(request):
+    allbooks = Book.objects.all()
+    book_filter = BookFilter(request.GET , queryset = allbooks)
     if 'query' in request.GET:
         query = request.GET['query'] 
         multiple_query = Q(Q(title__icontains = query) | Q(author__contains = query))
         allbooks = Book.objects.filter(multiple_query)
     else:
-        allbooks = Book.objects.all()
-    return render(request , 'allbooks.html' , {'allbooks' : allbooks})
+        allbooks = book_filter.qs
+    return render(request , 'allbooks.html' , {'allbooks' : allbooks , 'book_filter': book_filter})
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
@@ -93,3 +96,4 @@ def return_book(request, borrow_id):
 
 
     return redirect('borrowed_books', user_id=borrowed_book.user.pk)
+

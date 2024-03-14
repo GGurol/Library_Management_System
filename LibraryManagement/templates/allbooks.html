@@ -7,14 +7,33 @@
 <div class="allbooks">
     <div class="search_filter">
         <form class="d-flex search-book" role="search">
-            <input class=" form-control me-2" name="query" type="search" placeholder="Search by title or author"
+            <input class="form-control me-2" name="query" type="search" placeholder="Search by title or author"
                 aria-label="Search">
             <button class="btn btn-primary" type="submit">Search</button>
         </form>
+        <div class="bookfilter mt-4">
+            <button class="btn btn-outline-primary filter-toggle" type="button" data-bs-toggle="collapse"
+                data-bs-target="#filterCollapse" aria-expanded="false" aria-controls="filterCollapse">
+                Filters
+            </button>
+            <div class="collapse" id="filterCollapse">
+                <form method="get" class="filters">
+                    <label for="id_author">Author:</label>
+                    {{ book_filter.form.author }}
+
+                    <label for="id_genres">Genres:</label>
+                    {{ book_filter.form.genres }}
+
+                    <label for="id_is_available">Is Available:</label>
+                    {{ book_filter.form.is_available }}
+                    <button class="btn btn-primary w-100" type="submit">Apply Filters</button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div class="tabel">
-        <table class="table table-bordered table-hover mt-3 w-100">
+    <div class="tabel w-75">
+        <table class="table table-bordered table-hover mt-3 ">
             <thead>
                 <tr class="table-secondary">
                     <th scope="col">#</th>
