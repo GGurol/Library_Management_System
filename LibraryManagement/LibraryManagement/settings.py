@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [  
+INSTALLED_APPS = [ 
     'jazzmin',
     'ordered_model',
     'admin_interface',

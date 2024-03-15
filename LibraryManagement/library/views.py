@@ -3,9 +3,9 @@ from django.db.models import Q
 # Create your views here.
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegistrationForm
+from .forms import RegistrationForm, ReviewForm
 from django.contrib.auth import login, logout, authenticate
-from .models import Book,User,Borrow
+from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime, timedelta
@@ -45,7 +45,22 @@ def all_books(request):
 
 def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
-    return render(request, 'book_detail.html', {'book': book})
+    reviews = Review.objects.filter(book=book)
+    has_borrowed = Borrow.objects.filter(book=book, user=request.user).exists()
+    has_reviewed =  Review.objects.filter(book=book , user=request.user ).exists()
+
+    if request.method == 'POST' and has_borrowed:
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            new_review = form.save(commit=False)
+            new_review.book = book
+            new_review.user = request.user
+            new_review.save()
+            messages.success(request, "Thank You for the Review! Review added successfully!")
+            return redirect('book_detail', book_id = book_id)
+    else:
+        form = ReviewForm()
+    return render(request, 'book_detail.html', {'book': book, 'reviews': reviews, 'form': form , 'has_borrowed': has_borrowed , 'has_reviewed': has_reviewed})
 
 def borrow(request, user_id, book_id):
     if request.method == 'POST':
