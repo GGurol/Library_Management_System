@@ -1,0 +1,168 @@
+
+
+.sidebar a{
+    color: white;
+    font-size: 1.8vw;
+    text-decoration: none;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+}
+.sidebar a:hover{
+    color: rgb(179, 179, 179);
+}
+
+.sidebar nav {
+    gap: 20px;
+}
+
+.sidebar ul {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.profile {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* ----------DashBoard---------- */
+
+.board {
+    padding: 10px;
+    margin: 20px;
+    width: 180px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard {
+    width: 95%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.books {
+    width: 90%;
+    margin: 10px auto;
+    
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto; 
+}
+
+/* ------manageBooks--------- */
+
+.manage-books{
+    width: 90%;
+    margin: 20px auto;
+}
+
+.search_filter {
+    margin: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.search_filter form {
+    width: 400px;
+}
+
+.manage-books-table{
+    max-height: 550px;
+    overflow-y: auto; 
+}
+
+/* ---------Add Book --------------- */
+
+
+.book-form {
+    background-color: rgba(220, 220, 220, 0.2);
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4px auto;
+    border-radius: 15px;
+    border: 2px solid rgb(220, 220, 220) ;
+}
+.book-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-form button {
+    background-color: #14a44d;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 8px;
+    width: 200px;
+    margin: 3px auto;
+}
+.book-form label{
+    font-size: 20px;
+    font-weight: bold;
+}
+.book-form input , select{
+    border: 1px solid;
+    border-radius: 5px;
+    width: 100%;
+    border: 2px solid #ccc;
+    margin-top: 3px;
+    padding: 4px;
+}
+
+.book-form #id_description {
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    height: 80px;
+    resize: none;
+    padding: 5px;
+    width: 100%;
+}
+.book-form #id_book_img {
+    border: none;
+}
+
+.book-form #book_img-clear_id {
+    width: 10px;
+}
+
+/* ----------Delete Book ------------- */
+
+.delete-book-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.delete-book {
+    text-align: center;
+}
+
+/* ---------issued Books ------------ */
+
+.borrowed_books {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.borrowed_books table{
+    margin-left: 20px;
+    max-height: 550px;
+    overflow-y: auto; 
+}

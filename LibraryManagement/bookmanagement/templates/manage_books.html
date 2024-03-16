@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Manage Books{% endblock %}
+{% load bootstrap_icons %}
+{% load static %}
+{% block content %}
+
+<div class="manage-books">
+    <h2>Manage Books</h2>
+    <div class="allbooks">
+        <div class="search_filter">
+
+            <a href="{% url 'add_book' %}" class="btn btn-success">Add Books</a>
+
+            <form class="d-flex search-book" role="search">
+                <input class="form-control me-2" name="query" type="search" placeholder="Search by title or author"
+                    aria-label="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="tabel w-75 manage-books-table">
+            <table class="table table-bordered table-hover mt-3 ">
+                <thead>
+                    <tr class="table-secondary">
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Copies</th>
+                        <th scope="col">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in allbooks %}
+                    <tr class="singlebook">
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class="fw-bold"> {{ book.title }} </td>
+                        <td>{{ book.author }}</td>
+                        <td>{% for genre in book.genres.all %}
+                            {{ genre.name }}
+                            {% if not forloop.last %}, {% endif %}
+                            {% endfor %}</td>
+                        <td>{{ book.copies }}</td>
+                        <td> <img src="{% static 'images/star.png' %}" alt="account" width="20px">
+                            {{ book.average_rating|floatformat:1 }}</td>
+                        <td>
+                            <a href="{% url 'edit_book' book.id %}" class="btn btn-primary"> Edit </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_book' book.id %}" class="btn btn-danger">Delete </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+{% endblock %}

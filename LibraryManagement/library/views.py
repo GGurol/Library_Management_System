@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegistrationForm, ReviewForm
+from .forms import RegistrationForm, ReviewForm, LoginForm
 from django.contrib.auth import login, logout, authenticate
 from .models import *
 from django.contrib.auth.decorators import login_required
@@ -28,7 +29,21 @@ def sign_up(request):
 
     return render(request, 'registration/sign_up.html', {"form": form} )
 
-def logout(request):
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            if user.is_admin():
+                return redirect ('admindashboard')
+            else:
+                return redirect ('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+def logout_view(request):
     logout(request)
     return redirect ('/home')
 
@@ -108,6 +123,7 @@ def return_book(request, borrow_id):
     returned_book = get_object_or_404 (Book, pk=borrowed_book.book_id)
     returned_book.copies += 1 
     returned_book.save()
+    messages.success(request , "Book Returned Successfuly! ")
 
 
     return redirect('borrowed_books', user_id=borrowed_book.user.pk)

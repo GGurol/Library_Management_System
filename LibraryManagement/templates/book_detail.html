@@ -17,7 +17,11 @@
     <div class="book_cover">
         <h5 style="margin-left: 20px;"> {% bs_icon 'arrow-left-circle' %}<a href="{% url 'all-books' %}"> Back</a>
         </h5>
+        {% if book.book_img %}
         <img src="{{ book.book_img.url }}" alt=" book cover for {{ book.title }}" width="">
+        {% else %}
+        <img src="{% static 'images/book-cover.png' %}" alt=" book cover for {{ book.title }}" width="">
+        {% endif %}
     </div>
 
     <div class="book_details">

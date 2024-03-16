@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_bootstrap_icons',
     'django_filters',
-    'library'
+    'library', 
+    'bookmanagement'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'bootstrap5')

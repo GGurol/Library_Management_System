@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Issued Books{% endblock %}
+{% block content %}
+
+
+<div class="borrowed_books">
+    <h2>Issued Books</h2>
+
+    {% if issued_books %}
+    <table class="table table-bordered table-hover ">
+        <thead class="table-secondary">
+            <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Borrower</th>
+                <th scope="col">Borrowed Date</th>
+                <th scope="col">Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrow in issued_books %}
+            <tr>
+                <td>{{ borrow.book.title }}</td>
+                <td>{{ borrow.user.username }}</td>
+                <td>{{ borrow.borrow_date }}</td>
+                <td>{{ borrow.return_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h4 class="text-center">No issued books</h4>
+    {% endif %}
+
+
+    <h2>Overdue Books</h2>
+    {% if overdue_books %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Borrower</th>
+                <th scope="col">Borrowed Date</th>
+                <th scope="col">Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrow in overdue_books %}
+            <tr>
+                <td>{{ borrow.book.title }}</td>
+                <td>{{ borrow.user.username }}</td>
+                <td>{{ borrow.borrow_date }}</td>
+                <td>{{ borrow.return_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h4 class="text-center">No overdue books</h4>
+    {% endif %}
+</div>
+
+{% endblock %}

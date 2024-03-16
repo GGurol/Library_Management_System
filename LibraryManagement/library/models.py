@@ -69,7 +69,7 @@ class Book(models.Model):
     def total_reviews(self):
         return Review.objects.filter(book=self).count()
     def is_available(self):
-        return self.description > 0
+        return self.copies > 0
 
 class Genre(models.Model): 
     name = models.CharField(max_length=255)
