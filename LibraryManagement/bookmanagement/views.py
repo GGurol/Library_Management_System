@@ -7,6 +7,7 @@ from datetime import date, datetime
 from django.db.models import Q
 from django.db.models import Avg, Count
 from .decorators import admin_required
+from django.views.decorators.http import require_POST
 
 
 
@@ -81,3 +82,42 @@ def issued_books(request):
     issued_books = Borrow.objects.filter(is_returned=False).select_related('user', 'book')
     overdue_books = Borrow.objects.filter(is_returned=False, return_date__lt=date.today()).select_related('user', 'book')
     return render(request, 'issued_books.html', {'issued_books': issued_books, 'overdue_books': overdue_books})
+
+from django.shortcuts import redirect
+
+def student_list(request):
+    query = request.GET.get('query')
+    if query:
+        students = User.objects.filter(
+            role='Student',
+            username__icontains=query
+        ).annotate(
+            num_borrowed_books=Count('borrow', filter=Q(borrow__is_returned=False)),
+            num_returned_books=Count('borrow', filter=Q(borrow__is_returned=True)),
+            num_pending_books=Count('borrow') - Count('borrow', filter=Q(borrow__is_returned=True))
+        )
+    else:
+        students = User.objects.filter(role='Student').annotate(
+            num_borrowed_books=Count('borrow', filter=Q(borrow__is_returned=False)),
+            num_returned_books=Count('borrow', filter=Q(borrow__is_returned=True)),
+            num_pending_books=Count('borrow') - Count('borrow', filter=Q(borrow__is_returned=True))
+        )
+    return render(request, 'student_list.html', {'students': students, 'query': query})
+
+@require_POST
+def ban_student(request, student_id):
+    student = get_object_or_404(User, pk=student_id)
+    if not student.is_banned:
+        student.is_banned = True
+        student.save()
+        messages.success(request, f"{student.username} has been banned successfully.")
+    return redirect('student_list')
+
+@require_POST
+def unban_student(request, student_id):
+    student = get_object_or_404(User, pk=student_id)
+    if student.is_banned:
+        student.is_banned = False
+        student.save()
+        messages.success(request, f"{student.username} has been unbanned successfully.")
+    return redirect('student_list')

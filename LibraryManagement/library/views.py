@@ -35,10 +35,10 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            if user.is_admin():
-                return redirect ('admindashboard')
-            else:
+            if user.is_student:
                 return redirect ('home')
+            else:
+                return redirect ('admindashboard')
         else:
             return redirect('login')
     else:
@@ -83,6 +83,10 @@ def borrow(request, user_id, book_id):
     if request.method == 'POST':
         user = get_object_or_404(User, pk=user_id)
         book = get_object_or_404(Book, pk=book_id)
+
+        if user.is_banned:
+            messages.error(request, "Sorry, you are not allowed to borrow books as you are banned. for more information contact the admin!")
+            return redirect('book_detail', book_id=book_id)
         
         if Borrow.objects.filter(user=user, book=book , is_returned = False).exists():
             messages.error(request, "You have already borrowed this book.")

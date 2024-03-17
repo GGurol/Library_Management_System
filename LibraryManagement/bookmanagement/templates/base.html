@@ -37,7 +37,12 @@
                     <a class="nav-link" href="{% url 'issued_books' %}">
                         &#x1f550 Issued Books </a>
                 </li>
-                <form action="{% url 'logout' %}" method="post" class="dropdown-item">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'student_list' %}">
+                        &#127891 Student List </a>
+                </li>
+                <form action="{% url 'logout' %}" method="post" class="dropdown-item"
+                    style="position: fixed; left: 20px; bottom: 20px;">
                     {% csrf_token %}
                     <input type="submit" value="Logout" class="btn btn-primary fw-bold logout-btn">
                 </form>

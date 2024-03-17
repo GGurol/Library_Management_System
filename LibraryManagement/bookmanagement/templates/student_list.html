@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Student List{% endblock %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="student-list">
+    <h2>Student List</h2>
+    <div class="all-students">
+        <div class="search_filter">
+            <form class="d-flex search-book mt-3 mx-auto" role="search">
+                <input class="form-control me-2" name="query" type="search" placeholder="Search by username"
+                    aria-label="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="tabel w-75 student-list-table">
+            <table class="table table-bordered table-hover mt-3">
+                <thead>
+                    <tr class="table-secondary">
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">No of Borrowed Books</th>
+                        <th scope="col">No of returned Books</th>
+                        <th scope="col">No of Pending Books</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr class="student">
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class="fw-bold">{{ student.username }}</td>
+                        <td>{{ student.num_borrowed_books }}</td>
+                        <td>{{ student.num_returned_books }}</td>
+                        <td>{{ student.num_pending_books }}</td>
+                        <td>
+                            {% if student.is_banned %}
+                            <form action="{% url 'unban_student' student.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-warning">Unban</button>
+                            </form>
+
+                            {% else %}
+                            <form action="{% url 'ban_student' student.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Ban</button>
+                            </form>
+
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

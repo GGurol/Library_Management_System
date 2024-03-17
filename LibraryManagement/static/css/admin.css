@@ -185,3 +185,18 @@ body {
     max-height: 550px;
     overflow-y: auto; 
 }
+/* -------Student List------------- */
+
+.student-list {
+    width: 90%;
+    margin: 100px auto;
+}
+
+.student-list table {
+    margin: 20px auto;
+}
+
+.all-students {
+    margin: 20px;
+    margin: 0 auto;
+}

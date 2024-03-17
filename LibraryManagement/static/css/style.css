@@ -251,10 +251,40 @@ html {
 }
 
 .add_review {
-    margin-top: 50px;
+    margin-top: 100px;
 }
 .rating{
     margin-left: 50px;
+}
+
+.add_review form p {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-review button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 8px;
+    width: 200px;
+    margin: 3px;
+}
+.add-review label{
+    font-size: 20px;
+    font-weight: bold;
+}
+.add-review input{
+    border: 1px solid;
+    border-radius: 5px;
+    width: 500px;
+    border: 2px solid #ccc;
+    margin-top: 3px;
+    padding: 4px;
+}
+.add-review #id_comment {
+    width: 500px;
+    height: 150px;
+    padding: 5px;
 }
 
 /* -------Borrowed Books ------------ */
