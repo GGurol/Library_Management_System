@@ -33,7 +33,6 @@
                         <th scope="col">No of Borrowed Books</th>
                         <th scope="col">No of returned Books</th>
                         <th scope="col">No of Pending Books</th>
-                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +43,7 @@
                         <td>{{ student.num_borrowed_books }}</td>
                         <td>{{ student.num_returned_books }}</td>
                         <td>{{ student.num_pending_books }}</td>
+                        {% if user.is_authenticated and user.is_superuser %}
                         <td>
                             {% if student.is_banned %}
                             <form action="{% url 'unban_student' student.id %}" method="post">
@@ -56,9 +56,9 @@
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger">Ban</button>
                             </form>
-
                             {% endif %}
                         </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
