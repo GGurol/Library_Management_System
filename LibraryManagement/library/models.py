@@ -35,12 +35,15 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
     
-    def is_student (self):
-        return self.role == 'Student'
-    def is_admin (self):
-        return self.role == 'Admin'
-    def is_superadmin (self):
-        return self.role == 'SuperAdmin'
+    @property
+    def is_student(self):
+        return self.role.strip() == self.STUDENT
+    @property
+    def is_admin(self):
+        return self.role.strip() == self.ADMIN
+    @property
+    def is_superadmin(self):
+        return self.role.strip() == self.SUPER_ADMIN
     objects = UserManager()
     
 class Book(models.Model): 

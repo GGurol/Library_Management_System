@@ -4,76 +4,75 @@
 {% load static %}
 {% block content %}
 
-<div class="dashboard">
-    <div class="board total_books card text-white bg-primary">
-        <div class="card-body board">
-            <h5 class="card-title fw-bold fs-4">
-                Total Books</h5>
-            <p class="text-center fs-3">{{ total_books }} </p>
+<div>
+    <h1 class="text-center" style="margin-top: 40px;">DashBoard</h1>
+    <div class="dashboard">
+        <div class="board total_books card text-white bg-primary">
+            <div class="card-body board">
+                <h5 class="card-title fw-bold fs-4">
+                    Total Books</h5>
+                <p class="text-center fs-3">{{ total_books }} </p>
+            </div>
+        </div>
+        <div class="board available_books card text-white bg-success">
+            <div class="card-body board">
+                <h5 class="card-title fw-bold fs-5">
+                    Avalilable Books</h5>
+                <p class="text-center fs-3"> {{ available_books }} </p>
+            </div>
+        </div>
+        <div class="board total_students card text-white bg-info">
+            <div class="card-body board">
+                <h5 class="card-title fw-bold fs-5">
+                    Total Students</h5>
+                <p class="text-center fs-3"> {{ total_students }}</p>
+            </div>
+        </div>
+        <div class="board issued_books card text-white bg-warning">
+            <div class="card-body board">
+                <h5 class="card-title fw-bold fs-4">
+                    Issued Books</h5>
+                <p class="text-center fs-3"> {{ borrowed_books }}</p>
+            </div>
+        </div>
+        <div class="board overdue_books card text-white bg-danger">
+            <div class="card-body board">
+                <h5 class="card-title fw-bold fs-5">
+                    Over Due Books</h5>
+                <p class="text-center fs-3">{{ overdue_books }}</p>
+            </div>
         </div>
     </div>
-    <div class="board available_books card text-white bg-success">
-        <div class="card-body board">
-            <h5 class="card-title fw-bold fs-5">
-                Avalilable Books</h5>
-            <p class="text-center fs-3"> {{ available_books }} </p>
+    <h3 style="margin: 10px 20px;">Top Rated Books</h3>
+    <div class="top-rated-books d-flex">
+        {% for book in top_rated_books %}
+        <div class="card">
+            <img src="{{ book.book_img.url }}" alt="book cover for {{ book.title }}" class="card-img-top">
+            <div class="card-body">
+                <p class="card-title fw-bold">{{ book.title }}</p>
+                <p class="card-text"> <span>&#11088</span> {{ book.average_rating|floatformat:1 }}
+                    | {{ book.total_reviews}} Reviews
+                </p>
+            </div>
         </div>
+        {% endfor %}
     </div>
-    <div class="board total_students card text-white bg-info">
-        <div class="card-body board">
-            <h5 class="card-title fw-bold fs-5">
-                Total Students</h5>
-            <p class="text-center fs-3"> {{ total_students }}</p>
+
+    <h3 style="margin: 10px 20px;">Most Borrowed Books</h3>
+    <div class="top-rated-books d-flex">
+        {% for book in most_borrowed_books %}
+        <div class="card">
+            <img src="{{ book.book_img.url }}" alt="book cover for {{ book.title }}" class="card-img-top">
+            <div class="card-body">
+                <p class="card-title fw-bold">{{ book.title }}</p>
+                <p class="card-text"> borrowed {{ book.num_borrows }} times
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="board issued_books card text-white bg-warning">
-        <div class="card-body board">
-            <h5 class="card-title fw-bold fs-4">
-                Issued Books</h5>
-            <p class="text-center fs-3"> {{ borrowed_books }}</p>
-        </div>
-    </div>
-    <div class="board overdue_books card text-white bg-danger">
-        <div class="card-body board">
-            <h5 class="card-title fw-bold fs-5">
-                Over Due Books</h5>
-            <p class="text-center fs-3">{{ overdue_books }}</p>
-        </div>
+        {% endfor %}
     </div>
 </div>
 
-<div class="books">
-    <h3>Books</h3>
-    <div class="table-container">
-        <table class="table table-bordered table-hover mt-3 bg-dark table-striped">
-            <thead>
-                <tr class="table-secondary">
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Copies</th>
-                    <th scope="col">Rating</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in allbooks %}
-                <tr class="singlebook">
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td> <a href="{% url 'book_detail' book.id %}">{{ book.title }} </a></td>
-                    <td>{{ book.author }}</td>
-                    <td>{% for genre in book.genres.all %}
-                        {{ genre.name }}
-                        {% if not forloop.last %}, {% endif %}
-                        {% endfor %}</td>
-                    <td>{{ book.copies }}</td>
-                    <td> <img src="{% static 'images/star.png' %}" alt="account" width="30px">
-                        {{ book.average_rating|floatformat:1 }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+
 
 {% endblock %}

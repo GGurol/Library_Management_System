@@ -39,13 +39,15 @@ def login_view(request):
                 return redirect ('admindashboard')
             else:
                 return redirect ('home')
+        else:
+            return redirect('login')
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
-    return redirect ('/home')
+    return redirect ('/')
 
 def all_books(request):
     allbooks = Book.objects.all()

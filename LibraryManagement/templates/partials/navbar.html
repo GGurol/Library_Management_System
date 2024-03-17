@@ -15,16 +15,15 @@
                 </div>
             </div>
             {% if user.is_authenticated %}
-            <div class="account dropdown">
-                <div class="profile" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{% static 'images/account.png' %}" alt="account">
-                    <a class="username">{{user.username}}</a>
-                    <div class="dropdown-menu logout-menu">
-                        <form action="{% url 'logout' %}" method="post" class="dropdown-item">
-                            {% csrf_token %}
-                            <input type="submit" value="Logout" class="btn btn-primary fw-bold logout-btn">
-                        </form>
-                    </div>
+            <div class="profile">
+                <img src="{% static 'images/account.png' %}" alt="account">
+                <a class="username">{{user.username}}</a>
+                <div>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout" class="btn btn-primary fw-bold logout-btn"
+                            style="width: 90px;">
+                    </form>
                 </div>
             </div>
             {% else %}
