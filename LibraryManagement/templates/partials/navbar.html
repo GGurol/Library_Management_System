@@ -19,11 +19,8 @@
                 <img src="{% static 'images/account.png' %}" alt="account">
                 <a class="username">{{user.username}}</a>
                 <div>
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="Logout" class="btn btn-primary fw-bold logout-btn"
-                            style="width: 90px;">
-                    </form>
+                    <a class="btn btn-primary" href="{% url 'logout' %}"> <span
+                            class="glyphicon glyphicon-log-out"></span> logout</a>
                 </div>
             </div>
             {% else %}
