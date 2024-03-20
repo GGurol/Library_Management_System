@@ -30,7 +30,7 @@ Follow these steps to set up and run the Django library management system:
 
    ```bash
    python3 -m venv venv
-   source venv/bin/activate
+   source venv/Scripts/activate
    ```
 
 4. Install dependencies from the `Requirements.txt` file:
