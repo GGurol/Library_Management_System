@@ -1,0 +1,85 @@
+.
+├── bookmanagement
+│   ├── admin.py
+│   ├── apps.py
+│   ├── decorators.py
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── migrations
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── templates
+│   │   ├── add_book.html
+│   │   ├── admindashboard.html
+│   │   ├── base.html
+│   │   ├── edit_book.html
+│   │   ├── issued_books.html
+│   │   ├── manage_books.html
+│   │   └── student_list.html
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── db.sqlite3
+├── docker-compose.yml
+├── Dockerfile
+├── library
+│   ├── admin.py
+│   ├── apps.py
+│   ├── filters.py
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_rename_status_borrow_is_returned.py
+│   │   ├── 0003_alter_review_rating.py
+│   │   ├── 0004_user_is_banned.py
+│   │   └── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── LibraryManagement
+│   ├── asgi.py
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── manage.py
+├── media
+│   ├── 12-rule-for-life.jpg
+│   ├── alchemist.jpg
+│   ├── atomic-habit.jpg
+│   ├── harry-potter.jpg
+│   ├── laws-of-powerL.jpg
+│   ├── Mans-Search-for-Meaning.jpg
+│   ├── start-with-why.jpg
+│   └── the-idiot.jpg
+├── README.md
+├── requirements.txt
+├── static
+│   ├── css
+│   │   ├── admin.css
+│   │   └── style.css
+│   └── images
+│       ├── account.png
+│       ├── admin.png
+│       ├── bgimg.jpg
+│       ├── book-cover.png
+│       ├── reading.svg
+│       ├── star.png
+│       ├── student.png
+│       └── superadmin.png
+├── templates
+│   ├── allbooks.html
+│   ├── book_detail.html
+│   ├── borrowed_books.html
+│   ├── home.html
+│   ├── partials
+│   │   ├── base.html
+│   │   └── navbar.html
+│   └── registration
+│       ├── login.html
+│       └── sign_up.html
+└── tree.txt
+
+14 directories, 69 files

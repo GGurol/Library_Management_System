@@ -1,6 +1,6 @@
 # Django Library Management System
 
-This is a Django-based library management system capstone project at GDSCAAstu.
+This is a Django-based library management system capstone project.
 
 ## Features
 
@@ -17,56 +17,40 @@ Follow these steps to set up and run the Django library management system:
 1. Clone the repository to your local machine:
 
    ```bash
-   https://github.com/Tonetor777/Django_Library_Management_System.git
+   git clone https://github.com/GGurol/Django_Library_Management_System.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd LibraryManagement
+   cd Library_Management_System
    ```
 
-3. Create and activate a virtual environment (optional but recommended):
+3. Build the docker and build:
 
    ```bash
-   python3 -m venv venv
-   source venv/Scripts/activate
+   docker compose up --build -d
    ```
 
-4. Install dependencies from the `Requirements.txt` file:
+4. Apply database migrations:
 
    ```bash
-   pip install -r Requirements.txt
+   docker compose exec web python manage.py makemigrations
+   docker compose exec web python manage.py migrate
    ```
 
-5. Apply database migrations:
+5. Create a superuser to access the admin interface:
 
    ```bash
-   python manage.py migrate
+   docker compose exec web python manage.py createsuperuser
    ```
 
-6. Create a superuser to access the admin interface:
-
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-7. Run the development server:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-8. Access the application in your web browser at `http://localhost:8000`.
+6. Access the application in your web browser at `http://localhost:8000`.
 
 ## Usage
 
-- Log in to the Django admin interface using the credentials of the superuser created in step 6.
+- Log in to the Django admin interface using the credentials of the superuser created in step 5.
 - Add books, manage borrowers, issue and return books, and perform other administrative tasks.
 - Use the provided templates and views for borrower-facing functionalities.
 - Customize the application as needed to suit your specific library management requirements.
-
-## Contributors
-
-contributors for this projects are `https://github.com/Rafii05k` , `https://github.com/yeabyir` and `https://github.com/Yohannes18`
 
